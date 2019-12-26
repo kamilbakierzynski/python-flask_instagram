@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oops!</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style_error.css') }}" />
+</head>
+<body>
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+			</div>
+			<h2>We've lost connection to our friend Chrome :(</h2>
+			<p>If you think that it's a bug make sure we know about it. File a new issue on Github! Please!</p>
+			<a href="{{ url_for('index') }}">Let me try again</a>
+		</div>
+	</div>
+</body>
+
+</html>

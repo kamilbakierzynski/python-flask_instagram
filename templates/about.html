@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings_style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <title>Instagram Helper</title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="img">
+            <img src="{{ url_for('static', filename='img/list.svg') }}">
+        </div>
+        <div class="form">
+          <form class="login-form" method="POST" action="/save_list">
+            <h3 id="question">About</h3>
+            <p>It's an instagram bot so be careful while using! Instagram does not like bots and often bans them.
+              Keep in mind that following large amount of accounts over and over will surely trigger Instagram anti-bot scripts.
+              These program can still have many bugs that couldn't be found during testing so if you've found one please report it 
+              by adding an issue on Github repository. This program it's not lightening fast due to the fact that it uses web scraping for
+              collecting data rather than API. Most of the time the action time needed is proportional to your account size, so if you
+              have a big one - be patient. All in all I hope this small software will help you. If you have any ideas how to improve this project, want
+              to support it or simply describe your feeling feel free to contact me on Github.
+            </p>
+            <a href="{{ url_for('menu') }}">Go back</a>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

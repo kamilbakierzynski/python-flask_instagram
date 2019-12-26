@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Instagram Helper - Menu</title>
+</head>
+<body>
+    <div class="content">
+        <a href="{{ url_for('follow_page') }}">
+        <div class="card">
+           
+              <div class="icon"><i class="material-icons md-36">person_add</i></div>
+              <p class="title">Follow</p>
+              <p class="text">It's time to hunt for some followers!</p>
+           
+        </div></a>
+        <a href="{{ url_for('unfollow_page') }}">
+        <div class="card">
+           
+              <div class="icon"><i class="material-icons md-36">person_add_disabled</i></div>
+              <p class="title">Unfollow</p>
+              <p class="text">Get rid of those who don't follow you back.</p>
+           
+        </div></a>
+        <a href="{{ url_for('like_page') }}">
+            <div class="card">
+               
+                  <div class="icon"><i class="material-icons md-36">favorite</i></div>
+                  <p class="title">Like</p>
+                  <p class="text">"Better a broken heart than no heart at all"</p>
+               
+            </div></a>
+        <a href="{{ url_for('settings_page') }}">
+        <div class="card">
+           
+            <div class="icon"><i class="material-icons md-36">build</i></div>
+            <p class="title">Settings</p>
+            <p class="text">Let's adjust something!</p>
+      </div></a>
+      <a href="{{ url_for('get_likes') }}">
+            <div class="card">
+               
+                  <div class="icon"><i class="material-icons md-36">favorite_border</i></div>
+                  <p class="title">Who likes me</p>
+                  <p class="text">Let's see a graph with likes from people.</p>
+               
+            </div></a>
+            <a href="{{ url_for('photos_page') }}">
+            <div class="card">
+               
+                  <div class="icon"><i class="material-icons md-36">photo</i></div>
+                  <p class="title">Show my best photo</p>
+                  <p class="text">Which one is yours?</p>
+               
+            </div></a>
+            <a href="{{ url_for('stats_page') }}">
+                  <div class="card">
+                     
+                        <div class="icon"><i class="material-icons md-36">show_chart</i></div>
+                        <p class="title">My account<br>over time</p>
+                        <p class="text">View how is your acc doing over time.</p>
+                     
+                  </div></a>
+            <a href="{{ url_for('about_page') }}">
+            <div class="card">
+               
+                <div class="icon"><i class="material-icons md-36">check_box</i></div>
+                <p class="title">About</p>
+                <p class="text">Little about me!</p>
+          </div></a>
+     </div>
+  <div class="img">
+    <img id="lighthouse" src="{{ url_for('static', filename='img/lighthouse.svg') }}">
+</div>
+</body>
+</html>

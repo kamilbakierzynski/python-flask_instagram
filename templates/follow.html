@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <title>Instagram Helper - Follow</title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="img">
+            <img src="{{ url_for('static', filename='img/follow.svg') }}">
+        </div>
+        <div class="form">
+          <form class="login-form" method="POST" action="/follow_acc" onsubmit="return validateFormFollow()">
+            <h3 id="question">Let's specify some details...</h3 c>
+            <input name="hashtag" type="text" placeholder="#hashtag"/>
+            <h3 id="label1">Select how many...</h3> 
+            <div class="slidercontainer">
+                <input type="range" min="1" max="60" value="30" class="slider_num" name="num_follows" oninput="slider_update(this.value)">
+            </div>
+            <div class="rowdiv">
+              <h3 id="label2">Like photos during following.</h3>
+              <label class="switch">
+                <input name="likes_also" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <button type="submit">Start following</button>
+            <a href="{{ url_for('menu') }}" class="link">Go back</a>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

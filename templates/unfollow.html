@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <title>Instagram Helper - Unfollow</title>
+</head>
+<body>
+    <div id='loading'>
+      <img src="{{ url_for('static', filename='img/wait.gif') }}">
+    </div>
+    <div class="login-page">
+        <div class="img">
+            <img src="{{ url_for('static', filename='img/follow.svg') }}">
+        </div>
+        <div class="form">
+          <form class="login-form" method="POST" action="/unfollow_acc" onsubmit="displayWaitGif()">
+            <h3 id="question">Let's specify some details...</h3>
+            <select class="select-css" name="dropdown" id="dropdown" onchange="block_input()">
+                <option value="0">Accounts that don't follow you</option>
+                <option value="1">Accounts from last run</option>
+            </select>
+            <h3 id="label1">Skip above?</h3> 
+            <div class="slidercontainer">
+                <input id="skip_above" type="range" min="10" max="500" value="50" class="slider_num" name="skip_above" oninput="slider_update_unfollow(this.value)">
+            </div>
+            <button type="submit">Start unfollowing</button>
+            <a href="{{ url_for('menu') }}" class="link">Go back</a>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

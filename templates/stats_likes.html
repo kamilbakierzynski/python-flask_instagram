@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Instagram Helper - Stats</title>
+</head>
+<body style="background-color: #f2f2f2;">
+    <div class="container">
+        <canvas id='followers_chart'></canvas>
+    </div>
+    <div class='link' style="text-align: center;">
+        <a href="{{ url_for('menu') }}" style="display: inline-block; margin-top: 15px;">Go back</a>
+    </div c>
+
+    <script>
+        var followersChart = document.getElementById('followers_chart').getContext('2d');
+
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777'
+
+        var followersDataChart = new Chart(followersChart, {
+            type:'bar',
+            data: {
+                labels: [{% for value_data in labels %}'{{ value_data }}' ,{% endfor %}],
+                datasets: [{
+                    label: 'Likes',
+                    data: [{{  values|join(', ') }}],
+                    backgroundColor: '#fdc10d81',
+                    borderWidth: 4,
+                    borderColor: "#fdc10d"
+                }]
+            
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Most active users on {{ photo_count }} photos.',
+                    fontSize:25
+                },
+                legend: {
+                    position: "bottom"
+                },
+                layout: {
+                    padding: {
+                        left:50,
+                        right:50,
+                        bottom:0,
+                        top:10
+                    }
+                }
+                
+            }
+        });
+    </script>
+
+</body style="background-color: #f2f2f2;">
+</html>

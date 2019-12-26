@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <title>Instagram Helper</title>
+</head>
+<body onload="random_question_greeting()">
+    <div class="login-page">
+        <div class="img">
+            <img src="{{ url_for('static', filename='img/login.svg') }}">
+        </div>
+        <div class="form">
+          <form class="login-form" method="POST" action="/login">
+            <h3 id="question">{{ label }}</h3>
+            <input name="username" type="text" placeholder="username"/>
+            <input name="password" type="password" placeholder="password"/>
+            <button type="submit">login</button>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

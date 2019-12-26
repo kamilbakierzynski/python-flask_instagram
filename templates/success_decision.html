@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <title>Instagram Helper</title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="img">
+            <img src="{{ url_for('static', filename='img/question.svg') }}">
+        </div>
+        <div class="form">
+          <form class="login-form" method="POST" action="/login">
+            <h3 id="question">Red or Green?</h3>
+            <h3>{{ title }}</h3>
+            {% for acc in acc_list %}
+                <h3 class='accounts_list'>{{ acc }}</h3>
+            {% endfor %}
+            <div class="rowdivequal">
+              <a href="{{ url_for('unfollow_accounts_list') }}"><button style="background-color: #ED2939;">Unfollow</button></a>
+              <a href="{{ url_for('save_list_unfollow') }}"><button style="background-color: #3F704D;">Save to list</button></a>
+            </div>
+            <a href="{{ url_for('menu') }}">Go back</a>
+          </form>
+        </div>
+      </div>
+</body>
+</html>
