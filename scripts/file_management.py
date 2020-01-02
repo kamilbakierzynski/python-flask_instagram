@@ -67,14 +67,12 @@ def display_stats():
         line_count = 0
         for row in csv_reader:
             if line_count != 0:
-                labels.append(row[0])
-                values_followers.append(row[1])
-                values_follows.append(row[2])
+                if len(row) == 3:
+                    labels.append(row[0])
+                    values_followers.append(row[1])
+                    values_follows.append(row[2])
             line_count += 1
     
     csv_file.close()
     
     return labels, values_followers, values_follows
-
-
-display_stats()

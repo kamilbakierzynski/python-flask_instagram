@@ -15,7 +15,7 @@
             <img src="{{ url_for('static', filename='img/question.svg') }}">
         </div>
         <div class="form">
-          <form class="login-form" method="POST" action="/login">
+          <div class="login-form">
             <h3 id="question">Red or Green?</h3>
             <h3>{{ title }}</h3>
             {% for acc in acc_list %}
@@ -26,7 +26,7 @@
               <a href="{{ url_for('save_list_unfollow') }}"><button style="background-color: #3F704D;">Save to list</button></a>
             </div>
             <a href="{{ url_for('menu') }}">Go back</a>
-          </form>
+          </div>
         </div>
       </div>
 </body>

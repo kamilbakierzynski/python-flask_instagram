@@ -26,7 +26,7 @@
         var followersDataChart = new Chart(followersChart, {
             type:'line',
             data: {
-                labels: [{% for value_data in labels %}{{ value_data }} ,{% endfor %}],
+                labels: [{% for value_data in labels %}'{{ value_data }}' ,{% endfor %}],
                 datasets: [{
                     label: 'Followers',
                     data: [{% for value_data in data_followers %}{{ value_data }} ,{% endfor %}],

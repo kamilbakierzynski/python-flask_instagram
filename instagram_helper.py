@@ -111,9 +111,10 @@ def unfollow_accounts_list():
 
 @app.route('/save_list_unfollow')
 def save_list_unfollow():
+    print("save_list_unfollow")
     if 'people_to_unfollow_list' in session:
-        people_to_unfollow = session.get('people_to_unfollow_list', None)
-    file_management.append_to_keep_following(people_to_unfollow)
+        people_to_unfollow = session.get('people_to_unfollow_list', [])
+        file_management.append_to_keep_following(people_to_unfollow)
     if 'people_to_unfollow_list' in session:
         session.pop('people_to_unfollow_list', None)
     if 'skip_above' in session:
@@ -144,30 +145,31 @@ def save_list():
 @app.route("/stats")
 def stats_page():
     labels, values_followers, values_follows = file_management.display_stats()
+    labels_format = []
+    values_followers_format = []
+    values_follows_format = []
+    for i in range(len(labels)):
+        labels[i] = datetime.datetime.fromtimestamp(int(labels[i]))
+        labels[i] = str(labels[i]).split(' ')[0]
+    for i in range(len(labels)):
+        try:
+            if labels[i] != labels[i+1]:
+                labels_format.append(labels[i])
+                values_followers_format.append(values_followers[i])
+                values_follows_format.append(values_follows[i])
+        except:
+            labels_format.append(labels[i])
+            values_followers_format.append(values_followers[i])
+            values_follows_format.append(values_follows[i])
+
     if len(labels) > 50:
         labels = labels[-50:]
         values_followers = values_followers[-50:]
         values_follows = values_follows[-50:]
-    for index, value in enumerate(values_followers):
-        if index == len(values_followers)-1:
-            value = f"{value}"
-        else:
-            value = f"{value},"
-    for index, value in enumerate(values_follows):
-        if index == len(values_follows)-1:
-            value = f"{value}"
-        else:
-            value = f"{value},"
-    for index, label in enumerate(labels):
-        label = datetime.datetime.fromtimestamp(int(label))
-        label = str(label).split(' ')[0].split('-')
-        label = f"{label[2]}.{label[1]}"
-        if index == len(labels)-1:
-            label = f"{label}"
-        else:
-            label = f"{label},"
     
-    return render_template('stats.html', labels=labels, data_followers=values_followers, data_follows=values_follows)
+    print(labels)
+    
+    return render_template('stats.html', labels=labels_format, data_followers=values_followers_format, data_follows=values_follows_format)
 
 @app.route('/get_likes')
 def get_likes():
@@ -209,9 +211,9 @@ def photos_page():
 def about_page():
     return render_template('about.html')
   
-@app.errorhandler(Exception)
-def handle_exception(e):
-    return render_template("error.html", e=e), 500
+# @app.errorhandler(Exception)
+# def handle_exception(e):
+#     return render_template("error.html", e=e), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
