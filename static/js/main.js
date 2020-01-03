@@ -9,8 +9,12 @@ function slider_update(val) {
 }
 
 function slider_update_unfollow(val) {
+    if (val == 510) {
+        document.getElementById("label1").innerHTML = "Don't skip anyone";
+    } else {
     text = 'Skip above '
     document.getElementById("label1").innerHTML = text + val + ',000 followers.';
+    }
 }
 
 function slider_update_likes(val) {

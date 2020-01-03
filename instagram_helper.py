@@ -1,4 +1,4 @@
-import random, time, datetime, os
+import random, time, datetime, os, math
 import scripts.functions as functions
 import scripts.file_management as file_management
 from flask import Flask, render_template, request, url_for, flash, redirect, session
@@ -75,7 +75,7 @@ def unfollow_accounts():
         option = request.form['dropdown']
         if option == "1":
             people_to_unfollow = file_management.read_last_run()
-            people_skipped = functions.unfollow_list(people_to_unfollow, '', 1000000000)
+            people_skipped = functions.unfollow_list(people_to_unfollow, '', math.inf)
             return render_template('success.html', acc_list=people_skipped)
         skip_above = request.form['skip_above']
         follow_list, following_list = functions.scrape_for_followers_and_following(username)
@@ -102,9 +102,13 @@ def unfollow_accounts_list():
         people_to_unfollow = session.get('people_to_unfollow_list', None)
     if 'skip_above' in session:
         skip_above = session.get('skip_above', None)
+        if skip_above != 510:
+            skip_above = int(skip_above)*1000
+        else:
+            skip_above = math.inf
     if 'people_to_keep' in session:
         people_to_keep = session.get('people_to_keep', None)
-    people_skipped = functions.unfollow_list(people_to_unfollow, people_to_keep, int(skip_above)*1000)
+    people_skipped = functions.unfollow_list(people_to_unfollow, people_to_keep, skip_above)
     if len(people_skipped) == 0:
         return render_template('success.html', acc_list=people_skipped, title="No one was skipped.")
     return render_template('success.html', acc_list=people_skipped, title="You've skipped this accounts.")
@@ -152,12 +156,12 @@ def stats_page():
         labels[i] = datetime.datetime.fromtimestamp(int(labels[i]))
         labels[i] = str(labels[i]).split(' ')[0]
     for i in range(len(labels)):
-        try:
+        if i != len(labels) - 1:
             if labels[i] != labels[i+1]:
                 labels_format.append(labels[i])
                 values_followers_format.append(values_followers[i])
                 values_follows_format.append(values_follows[i])
-        except:
+        else:
             labels_format.append(labels[i])
             values_followers_format.append(values_followers[i])
             values_follows_format.append(values_follows[i])
