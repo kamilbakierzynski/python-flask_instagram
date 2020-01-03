@@ -93,22 +93,40 @@ def scrape_for_followers_and_following(username):
     follow_number = browser.find_element_by_xpath(
         '//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').text
 
-    browser.find_element_by_css_selector('ul > li:nth-child(2) > a').click()
-
-    follow_list = scrape_popup(follow_number)
-
-    button_close = browser.find_element_by_xpath('/html/body/div[4]/div/div[1]/div/div[2]/button')
-    button_close.click()
-
     following_number = browser.find_element_by_xpath(
         '//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text
 
-    browser.find_element_by_css_selector('ul > li:nth-child(3) > a').click()
+    follow_list = get_followers_and_following_list(mode='accounts_following_you', number=int(follow_number))
+    following_list = get_followers_and_following_list(mode='accounts_you_follow', number=int(following_number))
 
-    following_list = scrape_popup(following_number)
-
-    append_to_statistics(len(follow_list), len(following_list))
+    append_to_statistics(follow_number, following_number)
     return follow_list, following_list
+
+def get_followers_and_following_list(mode, number):
+    browser = selenium_browser.get_browser()
+    browser.get(f'https://www.instagram.com/accounts/access_tool/{mode}')
+
+    num_times = (number - 10) // 10
+    if number % 10 != 0:
+        num_times += 1
+
+    print(num_times)
+
+    for _ in range(num_times):
+        time.sleep(0.5)
+        try:
+            button = WebDriverWait(browser, 1).until(
+                EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/article/main/button')))
+            button.click()
+        except:
+            pass
+    
+    list_elem = browser.find_elements_by_css_selector('#react-root > section > main > div > article > main > section > div')
+    output_list = []
+    for web_object in list_elem:
+        output_list.append(web_object.text)
+
+    return output_list
 
 def save_account_stats():
     browser = selenium_browser.get_browser()
