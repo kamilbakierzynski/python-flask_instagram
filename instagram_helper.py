@@ -171,8 +171,6 @@ def stats_page():
         values_followers = values_followers[-50:]
         values_follows = values_follows[-50:]
     
-    print(labels)
-    
     return render_template('stats.html', labels=labels_format, data_followers=values_followers_format, data_follows=values_follows_format)
 
 @app.route('/get_likes')
@@ -209,15 +207,17 @@ def photos_page():
             max_likes = like_list[x]
             index_max = x
     functions.display_photo(username, index_max)
+    preety_label.reverse()
+    like_list.reverse()
     return render_template('stats_photos.html', labels=preety_label, values=like_list)
 
 @app.route('/about')
 def about_page():
     return render_template('about.html')
   
-# @app.errorhandler(Exception)
-# def handle_exception(e):
-#     return render_template("error.html", e=e), 500
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return render_template("error.html", e=e), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
